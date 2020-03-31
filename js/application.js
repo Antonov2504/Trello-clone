@@ -40,7 +40,7 @@ var Application = {
         var json = JSON.stringify(object);
         localStorage.setItem("trello", json);
 
-        console.log("Сохранено");
+        // console.log("Сохранено");
         return object;
     },
 

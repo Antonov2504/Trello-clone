@@ -40,14 +40,13 @@ class Note {
     doubleTap(event) {
         if (!Note.tapedTwice) {
             Note.tapedTwice = true;
-            console.log(Note.tapedTwice);
-
+            // console.log(Note.tapedTwice);
             setTimeout(function () { Note.tapedTwice = false; }, 300);
             return false;
         }
         event.preventDefault();
         //action on double tap goes below
-        console.log("double Tap!!!");
+        // console.log("double Tap!!!");
         this.element.setAttribute("contenteditable", true);
         this.element.removeAttribute("draggable");
         this.column.removeAttribute("draggable");

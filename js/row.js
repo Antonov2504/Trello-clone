@@ -34,7 +34,6 @@ var Row = {
             animation: 300,
             swap: true,
             onChoose: function (event) {
-                console.log(event.oldIndex, "Choose");
                 Row.currentSlides = Array.from(Row.swiperH.slides).splice(Row.swiperH.activeIndex, Row.swiperH.params.slidesPerView);
                 Row.slideIndex = Row.currentSlides.indexOf(event.item);
             },
@@ -62,13 +61,11 @@ var Row = {
                 Sortable.dragged.addEventListener("touchmove", function (event) {
                     if (Sortable.ghost && !Row.swiperH.navigation.nextEl.classList.contains("swiper-button-disabled") && event.touches[0].clientX >= Row.swiperH.navigation.nextEl.offsetLeft) {
                         Row.swiperH.navigation.nextEl.click();
-                        // Sortable.ghost.style.left = (-1) * Row.swiperH.translate + (Row.swiperH.slides[0].swiperSlideSize + Row.swiperH.params.spaceBetween) * (Row.slideIndex % Row.swiperH.params.slidesPerView) + "px";
-                        console.log(Row.swiperH.translate, Row.slideIndex, Row.slideIndex % Row.swiperH.params.slidesPerView, Sortable.ghost.style.left);
+                        // console.log(Row.swiperH.translate, Row.slideIndex, Row.slideIndex % Row.swiperH.params.slidesPerView, Sortable.ghost.style.left);
                     }
 
                     if (Sortable.ghost && !Row.swiperH.navigation.prevEl.classList.contains("swiper-button-disabled") && event.touches[0].clientX <= Row.swiperH.navigation.prevEl.offsetWidth) {
                         Row.swiperH.navigation.prevEl.click();
-                        // Sortable.ghost.style.left = (-1) * Row.swiperH.translate + (Row.swiperH.slides[0].swiperSlideSize + Row.swiperH.params.spaceBetween) * (Row.slideIndex % Row.swiperH.params.slidesPerView) + "px";
                     }
 
                     if (Sortable.ghost && Row.trash.classList.contains("active") && event.touches[0].clientY < Row.trash.offsetTop) {
@@ -86,16 +83,10 @@ var Row = {
                 Row.swiperH.update();
                 Row.swiperH.updateAutoHeight(300);
                 Row.initialisation();
-
-                console.log("UPDATE!");
             },
             onEnd: function (event) {
-                console.log(event.item);
                 if (Row.trash.classList.contains("active")) {
-                    console.log("DELETE DATA!!!");
-
                     var columnId = parseInt(event.item.getAttribute("data-column-id"));
-                    console.log(columnId);
                     Row.columnClasses.splice(Row.columnClasses[Row.columnClasses.indexOf(columnId)], 2);
                     event.item.parentNode.removeChild(event.item);
                 }
@@ -163,7 +154,6 @@ var Row = {
             },
             on: {
                 transitionStart: function (event) {
-                    console.log("transitionStart", Row.swiperH.activeIndex, Row.currentSlides);
                     if (Sortable.ghost) {
                         Sortable.ghost.style.left = (-1) * Row.swiperH.translate + (Row.swiperH.slides[0].swiperSlideSize + Row.swiperH.params.spaceBetween) * (Row.slideIndex % Row.swiperH.params.slidesPerView) + "px";
                     }
